@@ -1,4 +1,4 @@
-const { express, routes } = require("./controller/control");
+const { express, routes } = require("./controller");
 const errorHandling = require("./middleware/ErrorHandling");
 
 const path = require("path");

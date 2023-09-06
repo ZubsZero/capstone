@@ -37,12 +37,7 @@ function verifyAToken(req, res, next) {
           message: "Please register!",
         });
       }
-    } else {
-      res.json({
-        status: res.statusCode,
-        message: "Please register!",
-      });
-    }
+    } 
   } catch (err) {
     res.json({
       status: res.statusCode,
