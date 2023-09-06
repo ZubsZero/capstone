@@ -1,6 +1,14 @@
 <template>
   <router-view/>
+  <Footercomp/>
 </template>
+<script>
+import Footercomp from './components/footer-comp.vue'
+export default {
+  name: "App",
+  components: {Footercomp}
+}
+</script>
 
 <style>
 #app {

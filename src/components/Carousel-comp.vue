@@ -47,7 +47,9 @@
 
 .carousel.slide.fade {
     height: 35rem !important;
-}
+  
+  }
+
 
 .carousel-item {
     height: 35rem !important;
@@ -59,6 +61,7 @@
     background-position: center center;
     background-size: contain;
     background-repeat: no-repeat;
+    margin-top: 1.4rem;
 }
 
 .d-block.w-100.two {

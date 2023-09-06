@@ -28,7 +28,7 @@
       <div class="card2">
         <div class="card-image">
           <img
-            src="https://i.postimg.cc/zDQnJrVJ/g-shock-ga-700-4adr-removebg-preview.png"
+            src="https://i.postimg.cc/5tJBZSjL/g-shock-ga-2100-1adr-removebg-preview.png"
             alt="watch"
             class="image"
           />
@@ -87,8 +87,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Cinzel&display=swap");
 
 .image {
-  width: 10rem;
-  height: 10rem;
+  width: 12rem;
+  height: 12rem;
   margin: 1rem;
 }
 
@@ -120,7 +120,7 @@
 .card2,
 .card3,
 .card4 {
-  width: 15rem;
+  width: 30rem;
   height: 15rem;
   border: 1px solid rgb(255, 255, 255);
   box-shadow: 0 0 2px rgb(255, 255, 255);
@@ -128,7 +128,7 @@
 
 .card2,
 .card4 {
-  margin-left: 6rem;
+  margin-left: 1rem;
 }
 
 .cards {
@@ -142,7 +142,7 @@
   position: relative;
   bottom: 100%;
   height: 15rem;
-  width: 15rem;
+  width: 30rem;
   background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   flex-direction: column;
@@ -154,22 +154,22 @@
 
 .card1:hover .image {
   transition: 0.5s;
-  transform: scale(1.2);
+  transform: scale(1.1);
   filter: brightness(0.25);
 }
 .card2:hover .image {
   transition: 0.5s;
-  transform: scale(1.2);
+  transform: scale(1.1);
   filter: brightness(0.25);
 }
 .card3:hover .image {
   transition: 0.5s;
-  transform: scale(1.2);
+  transform: scale(1.1);
   filter: brightness(0.25);
 }
 .card4:hover .image {
   transition: 0.5s;
-  transform: scale(1.2);
+  transform: scale(1.1);
   filter: brightness(0.25);
 }
 
