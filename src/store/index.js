@@ -1,6 +1,6 @@
 import { createStore } from 'vuex';
 import axios from "axios"
-const watchtime = "https://watchtime.onrender.com/"
+const watchtime = "https://watchtime.onrender.com/products"
 
 export default createStore({
   state: {
@@ -59,15 +59,15 @@ export default createStore({
         this.isModalOpen = false;
       },
 
-      async fetchProducts() {
+      async fetchProducts(context) {
         try {
-          const response = await axios.get(
-            "https://yokohamaapi.onrender.com/products"
-          );
-          this.products = response.data.results;
+          const response = await axios.get('https://watchtime.onrender.com/products'); 
+          const products = response.data;
+          context.commit('setProducts', products); 
         } catch (error) {
-          console.error("Error fetching products:", error);
+          console.error('Error fetching products:', error);
         }
       },
-    
     }})
+
+    

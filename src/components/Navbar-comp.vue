@@ -16,16 +16,16 @@
             <router-link to="/" class="nav-link active" aria-current="page" href="#">Home</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/" class="nav-link" href="#">About</router-link>
+            <router-link to="/about" class="nav-link" href="#">About</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/" class="nav-link" href="#">Products</router-link>
+            <router-link to="/products" class="nav-link" href="#">Products</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/" class="nav-link" href="#">Contact</router-link>
+            <router-link to="/contact" class="nav-link" href="#">Contact</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/" class="nav-link" href="#">Admin</router-link>
+            <router-link to="/admin" class="nav-link" href="#">Admin</router-link>
           </li>
         </ul>
       </div>
