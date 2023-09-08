@@ -1,22 +1,17 @@
 <template>
   <router-view/>
-  <Footercomp/>
 </template>
 <script>
-import Footercomp from './components/footer-comp.vue'
+import foot from './components/footer-comp.vue'
 export default {
   name: "App",
-  components: {Footercomp}
+  components: {foot}
 }
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
   background-color: black;
 }
 

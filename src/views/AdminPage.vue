@@ -3,6 +3,7 @@
   <hero />
   <div class="products">
     <h1 class="h1">Products</h1>
+    <addproduct/>
     <div class="table-container">
       <table class="responsive-table">
         <thead>
@@ -61,20 +62,25 @@
           <button @click="deleteUser(user.UserID)" class="delete">
             Delete
           </button>
-          <button class="delete">Edit</button>
+          
         </div>
       </div>
     </div>
   </div>
+  <foot/>
 </template>
 <script>
 import navbar from "@/components/Navbar-comp.vue";
+import addproduct from "@/components/AddProduct.vue";
+import foot from '@/components/footer-comp.vue';
 import hero from "@/components/adminhero.vue";
 import axios from "axios";
 export default {
   components: {
     navbar,
     hero,
+    addproduct,
+    foot
   },
   data() {
     return {
@@ -128,9 +134,7 @@ export default {
         console.error("Error fetching users:", error);
       }
     },
-    editProduct(ProdID) {
-      this.$router.push({ name: "edit-product", params: { ProdID: ProdID } });
-    },
+   
   },
   mounted() {
     this.fetchProducts();
@@ -197,12 +201,10 @@ export default {
 table {
   width: 100%;
 }
-.table {
-  margin-top: 50px;
-  border: 3px solid black;
+.table-container {
+  margin-top: 3rem;
   width: 100%;
 }
-
 tr {
   background-color: black;
   border: 3px solid black;

@@ -78,8 +78,7 @@ export default {
   data() {
     return {
       products: [],
-      selectedSort: "lowest",
-      searchInput: "",
+   
     };
   },
   methods: {

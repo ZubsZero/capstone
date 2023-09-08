@@ -1,11 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import introView from '../views/intropageView.vue'
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'Intro',
+    component: introView
+  },
+  {
+    path: '/home',
+    name : 'home',
+    component: () => import('../views/HomeView.vue')
   },
   {
     path: '/about',
@@ -30,6 +36,29 @@ const routes = [
     path: '/admin',
     name: 'admin',
     component: () => import('../views/AdminPage.vue')
+  },
+  {
+    path: '/cart',
+    name: 'cart',
+    component: () => import('../views/CartView.vue')
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: () => import('../views/RegisterView.vue')
+
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: () => import('../views/RegisterView.vue')
+
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('../views/LoginView.vue')
+
   }
 ]
 

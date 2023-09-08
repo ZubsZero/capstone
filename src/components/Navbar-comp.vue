@@ -13,7 +13,7 @@
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <router-link to="/" class="nav-link active" aria-current="page" href="#">Home</router-link>
+            <router-link to="/home" class="nav-link active" aria-current="page" href="#">Home</router-link>
           </li>
           <li class="nav-item">
             <router-link to="/about" class="nav-link" href="#">About</router-link>
@@ -26,6 +26,9 @@
           </li>
           <li class="nav-item">
             <router-link to="/admin" class="nav-link" href="#">Admin</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/cart" class="nav-link" href="#">Cart</router-link>
           </li>
         </ul>
       </div>

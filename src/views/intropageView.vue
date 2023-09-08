@@ -8,7 +8,7 @@
             <h1 class="h1">Welcome To WatchTime</h1>
             <p>Have you not made an account click on sign-up<br> and start your account today</p>
             <div class="buttons">
-                <div class="button">Sign Up</div>
+                <router-link to="/register" class="link"><div class="button">Sign Up</div></router-link>
             </div>
            
         </div> 
@@ -63,11 +63,15 @@ font-family: 'Cinzel', serif;
 
 .image {
     width: 100%;
+    
 }
 
+.link {
+    text-decoration: none;
+}
 .image-2 {
-    width: 100%;
     height: 35rem;
+    object-fit: contain ;
 }
 
 .h1 {

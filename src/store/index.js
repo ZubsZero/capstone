@@ -9,7 +9,9 @@ export default createStore({
     user: null,
     users: null,
     orders: null,
-    order: null
+    order: null,
+    isAuthenticated: false,
+    token: null,
   },
   mutations: {
     setProducts: (state, products) => {
@@ -26,7 +28,14 @@ export default createStore({
     },
     setSpinner(state, products) {
       state.showSpinner = products;
-  }},
+  },
+  SET_AUTHENTICATED(state, value) {
+    state.isAuthenticated = value
+  },
+  SET_TOKEN(state, token) {
+    state.token = token
+  },
+},
   actions: {
 
       async addProduct() {
@@ -67,6 +76,12 @@ export default createStore({
         } catch (error) {
           console.error('Error fetching products:', error);
         }
+      },
+      setAuthenticated({ commit }, value) {
+        commit("SET_AUTHENTICATED", value)
+      },
+      setToken({ commit }, token) {
+        commit("SET_TOKEN", token)
       },
     }})
 
