@@ -149,7 +149,7 @@ export default createStore({
           authenticateUser.applyToken(token);
           swal({
             title: msg,
-            text: `Welcome back ${results?.FirstName} ${results?.LastName}`,
+            text: `Welcome back ${results?.Firstname} ${results?.Lastname}`,
             icon: "success",
             timer: 4000,
           });

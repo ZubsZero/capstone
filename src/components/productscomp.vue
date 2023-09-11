@@ -33,17 +33,25 @@
             <h4 class="h4">{{ product.ProdName }}</h4>
             <h4 class="h4">R {{ product.Price }}</h4>
             <h4 class="h4">{{ product.Brand }}</h4>
-            <div class="products-btns">
+            <div class="products-btn">
               <button class="view-more">
-            <router-link class="single"
-              :to="{
-                name: 'product',
-                params: { ProdID: product.ProdID },
-              }">
-                View More
-                </router-link
-            >
-           </button> 
+                <router-link
+                  class="single"
+                  :to="{
+                    name: 'product',
+                    params: { ProdID: product.ProdID },
+                    query: {
+                      name: product.ProdName,
+                      price: product.Price,
+                      category: product.category,
+                      picture: product.ProdUrl,
+                      brand: product.Brand,
+                    }
+                  }"
+                >
+                  View More
+                </router-link>
+              </button>
               <button type="button" class="addtocart">Add to cart</button>
             </div>
           </div>
