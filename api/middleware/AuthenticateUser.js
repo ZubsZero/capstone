@@ -1,19 +1,16 @@
 const { sign, verify } = require("jsonwebtoken");
 require("dotenv").config();
 
-function createToken(user) {
-  return sign(
-    {
-      email: user.email,
-      UserPwd: user.UserPwd,
-    },
-
-    process.env.secret_key,
-
-    {
-      expiresIn: "1h",
-    }
-  );
+function createToken(user){
+  return sign({
+      email:user.email,
+      UserPwd:user.UserPwd
+  },
+  process.env.SECRET_KEY,
+  {
+      expiresIn:'1h'
+  }
+  )
 }
 
 function verifyAToken(req, res, next) {
@@ -46,4 +43,4 @@ function verifyAToken(req, res, next) {
   }
 }
 
-module.exports = { createToken, verifyAToken };
+module.exports = {createToken,  verifyAToken };

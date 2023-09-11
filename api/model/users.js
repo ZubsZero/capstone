@@ -1,6 +1,7 @@
 const db = require("../config/db");
 const { createToken } = require("../middleware/AuthenticateUser");
 const bcrypt = require('bcrypt');
+const {hash ,compare ,hashSync} = require('bcrypt');
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
@@ -78,63 +79,44 @@ class Users {
     }
   }
   
-  async login(req, res) {
-    const { email, UserPwd } = req.body;
-  
-    try {
-      const query = `
-        SELECT UserID, FirstName, LastName, email, UserName, UserPwd, UserRole
-        FROM Users
-        WHERE email = ?;
-      `;
-  
-      db.query(query, [email], async (err, result) => {
-        if (err) {
-          console.error('Error querying the database:', err);
-          return res.status(500).json({ error: 'Internal server error' });
+   async login(req,res){
+    const {email, UserPwd} =
+    req.body
+    const query =
+    `
+    SELECT Firstname , Lastname, UserRole , email , UserPwd FROM Users
+    WHERE email = '${email}';
+    `
+    db.query(query,async(err, results)=>{
+        if(err) throw err
+        if(!results?.length){
+            res.json({
+                status:res.statusCode,
+                msg : "You provided a wrong email."
+            })
+        }else{
+            await compare(UserPwd, results[0].UserPwd,(cErr,cResults)=>{
+                if(cErr) throw cErr
+                // Create a token
+                const token = createToken({
+                    email, UserPwd
+                })
+                if(cResults){
+                    res.json({
+                        msg: "Welcome to Watchtime",
+                        token,
+                        results: results[0]
+                    })
+                }else{
+                    res.json({
+                        status: res.statusCode,
+                        msg: "Invalid password or you have not registered"
+                    })
+                }
+            })
         }
-  
-        if (!result?.length) {
-          return res.status(401).json({
-            status: res.statusCode,
-            message: 'Incorrect email or password!',
-          });
-        }
-  
-        const user = result[0];
-        const isPasswordValid = await bcrypt.compare(UserPwd, user.UserPwd);
-  
-        if (isPasswordValid) {
-          const token = jwt.sign(
-            { UserID: user.UserID, email: user.email },
-            process.env.secret_key, 
-            {
-              expiresIn: '1h',
-            }
-          );
-  
-          res.cookie('AuthorizedUser', token, {
-            maxAge: 3600000,
-            httpOnly: true,
-          });
-  
-          return res.status(200).json({
-            message: 'Welcome back to WatchTime!',
-            token,
-            user,
-          });
-        } else {
-          return res.status(401).json({
-            status: res.statusCode,
-            message: 'Incorrect email or password!',
-          });
-        }
-      });
-    } catch (error) {
-      console.error('Error during login:', error);
-      res.status(500).json({ error: 'Internal server error' });
-    }
-  }
+    })
+}
   
   async updateUser(req, res) {
     const query = `UPDATE Users SET ? WHERE UserID = ?`;
