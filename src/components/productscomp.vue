@@ -34,7 +34,16 @@
             <h4 class="h4">R {{ product.Price }}</h4>
             <h4 class="h4">{{ product.Brand }}</h4>
             <div class="products-btns">
-              <button type="button" class="view-more">View more</button>
+              <button class="view-more">
+            <router-link class="single"
+              :to="{
+                name: 'product',
+                params: { ProdID: product.ProdID },
+              }">
+                View More
+                </router-link
+            >
+           </button> 
               <button type="button" class="addtocart">Add to cart</button>
             </div>
           </div>
@@ -73,68 +82,19 @@
   </div>
 </template>
 <script>
-import axios from "axios";
 export default {
   data() {
     return {
       products: [],
-   
     };
   },
-  methods: {
-    async fetchProducts() {
-      try {
-        const response = await axios.get(
-          "https://watchtime.onrender.com/products"
-        );
-        this.products = response.data.results;
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    },
-    sortProducts() {
-      if (this.selectedSort === "lowest") {
-        this.products.sort((a, b) => a.amount - b.amount);
-      } else if (this.selectedSort === "highest") {
-        this.products.sort((a, b) => b.amount - a.amount);
-      }
-    },
-    filterProducts() {
-      const searchQuery = this.searchInput.toLowerCase();
-      this.products = this.sortedProducts.filter(
-        (product) =>
-          product.prodName.toLowerCase().includes(searchQuery) ||
-          product.Category.toLowerCase().includes(searchQuery)
-      );
-    },
-    viewSingle(prodID) {
-      const singleProduct = this.products.find(
-        (product) => product.prodID === prodID
-      );
-      this.$store.commit("setSingleProduct", singleProduct);
-      this.$router.push({ name: "single-product", params: { prodID: prodID } });
-    },
-  },
   computed: {
-    sortedProducts() {
-      if (this.selectedSort === "lowest") {
-        return this.products.slice().sort((a, b) => a.amount - b.amount);
-      } else if (this.selectedSort === "highest") {
-        return this.products.slice().sort((a, b) => b.amount - a.amount);
-      } else {
-        return this.products;
-      }
-    },
-    filteredProducts() {
-      if (this.searchInput) {
-        return this.filterProducts();
-      } else {
-        return this.sortedProducts;
-      }
+    products() {
+      return this.$store.state.products;
     },
   },
   mounted() {
-    this.fetchProducts();
+    this.$store.dispatch("fetchProducts");
   },
 };
 </script>
@@ -194,7 +154,7 @@ input {
 
 option {
   font-family: "Cinzel", serif;
-  background-color:black ;
+  background-color: black;
   color: white;
 }
 

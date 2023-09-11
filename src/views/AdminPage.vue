@@ -3,7 +3,7 @@
   <hero />
   <div class="products">
     <h1 class="h1">Products</h1>
-    <addproduct/>
+    <addproduct />
     <div class="table-container">
       <table class="responsive-table">
         <thead>
@@ -62,19 +62,17 @@
           <button @click="deleteUser(user.UserID)" class="delete">
             Delete
           </button>
-          
         </div>
       </div>
     </div>
   </div>
-  <foot/>
+  <foot />
 </template>
 <script>
 import navbar from "@/components/Navbar-comp.vue";
 import addproduct from "@/components/AddProduct.vue";
 import foot from '@/components/footer-comp.vue';
 import hero from "@/components/adminhero.vue";
-import axios from "axios";
 export default {
   components: {
     navbar,
@@ -87,60 +85,30 @@ export default {
       products: [],
     };
   },
-  methods: {
-    async deleteProduct(ProdID) {
-      try {
-        await axios.delete(`https://watchtime.onrender.com/product/${ProdID}`);
-        this.fetchProducts();
-      } catch (err) {
-        if (err.response && err.response.status === 404) {
-          alert("Product not found or already deleted.");
-        } else {
-          alert("Error deleting product.");
-          console.error("Error deleting product:", err);
-        }
+
+   computed: {
+      products() {
+        return this.$store.state.products;
+      },
+      users(){
+          return this.$store.state.users;
       }
     },
-    async deleteUser(UserID) {
-      try {
-        await axios.delete(`https://watchtime.onrender.com/user/${UserID}`);
-        this.fetchUsers();
-      } catch (err) {
-        if (err.response && err.response.status === 404) {
-          alert("User not found or already deleted.");
-        } else {
-          alert("Error deleting User.");
-          console.error("Error deleting User", err);
-        }
-      }
+    mounted() {
+      this.$store.dispatch("fetchProducts");
+      this.$store.dispatch("fetchUsers");
     },
-    async fetchProducts() {
-      try {
-        const response = await axios.get(
-          "https://watchtime.onrender.com/products"
-        );
-        this.products = response.data.results;
-      } catch (error) {
-        console.error("Error fetching products:", error);
+    methods: {
+       deleteProduct(ProdID) {
+        this.$store.dispatch("ProdDeleted", ProdID)
+      },
+
+      deleteUser(userID) {
+          this.$store.dispatch('UserDeleted', userID)
       }
-    },
-    async fetchUsers() {
-      try {
-        const response = await axios.get(
-          "https://watchtime.onrender.com/users"
-        );
-        this.users = response.data.results;
-      } catch (error) {
-        console.error("Error fetching users:", error);
-      }
-    },
-   
-  },
-  mounted() {
-    this.fetchProducts();
-    this.fetchUsers();
-  },
-};
+     }
+    }
+
 </script>
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Julius+Sans+One&family=Monoton&display=swap");

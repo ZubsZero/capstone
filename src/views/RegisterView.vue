@@ -9,7 +9,7 @@
                 <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                   <p class="text-center h1 mb-2 mx-1 mx-md-4 mt-2">Sign up</p>
 
-                  <form class="mx-1 mx-md-4">
+                  <form class="mx-1 mx-md-4" @submit.prevent="register">
                     <div class="d-flex flex-row align-items-center mb-0">
                       <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-4">
@@ -17,10 +17,24 @@
                           type="text"
                           id="form3Example1c"
                           class="form-control"
-                          v-model="firstName"
+                          v-model="payload.FirstName"
                         />
                         <label class="form-label" for="form3Example1c"
                           >Your Name</label
+                        >
+                      </div>
+                    </div>
+                    <div class="d-flex flex-row align-items-center mb-0">
+                      <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-4">
+                        <input
+                          type="text"
+                          id="form3Example1c"
+                          class="form-control"
+                          v-model="payload.LastName"
+                        />
+                        <label class="form-label" for="form3Example1c"
+                          >Your Last Name</label
                         >
                       </div>
                     </div>
@@ -32,7 +46,7 @@
                           type="email"
                           id="form3Example3c"
                           class="form-control"
-                          v-model="email"
+                          v-model="payload.email"
                         />
                         <label class="form-label" for="form3Example3c"
                           >Your Email</label
@@ -46,7 +60,7 @@
                           type="text"
                           id="form3Example4cd"
                           class="form-control"
-                          v-model="UserName"
+                          v-model="payload.UserName"
                         />
                         <label class="form-label" for="form3Example4cd"
                           >Username</label
@@ -61,7 +75,7 @@
                           type="password"
                           id="form3Example4c"
                           class="form-control"
-                          v-model="password"
+                          v-model="payload.UserPwd"
                         />
                         <label class="form-label" for="form3Example4c"
                           >Password</label
@@ -84,8 +98,16 @@
                     <div
                       class="d-flex justify-content-center mx-4 mb-3 mb-lg-4"
                     >
-                      <button type="button" class="btn btn-primary btn-lg" @click="register">
-                        Register
+                      <button
+                        type="submit"
+                        class="btn btn-primary btn-lg"
+                        :disabled="loading"
+                      >
+                        <span v-if="!loading">Register</span>
+                        <spinner v-else>
+                          <spinner/>
+                        </spinner>
+
                       </button>
                     </div>
                   </form>
@@ -108,71 +130,36 @@
   </section>
 </template>
 <script>
+import spinner from "@/components/spinnerComp.vue";
 export default {
-  methods: {
-
-    data() {
-      return {
-        firstName: "",
-        lastName: "",
-        email: "",
-        Username: "",
-        password: "",
-      };
-    },
-    async register() {
-      if (!this.validateForm()) {
-        return;
-      }
-
-      const registrationInfo = {
-        FirstName: this.FirstName,
-        LastName: this.LastName,
-        UserName: this.UserName,
-        email: this.email,
-        UserPwd: this.password,
-      };
-
-      try {
-        const response = await fetch(
-          "https://watchtime.onrender.com/register",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(registrationInfo),
-          }
-        );
-
-        if (response.status !== 200) {
-          throw new Error(
-            `Server responded with status code: ${response.status}`
-          );
-        }
-
-        const data = await response.json();
-
-        if (data.token) {
-          localStorage.setItem("authToken", data.token);
-          this.setAuthenticated(true);
-          // this.$router.push({ name: '/' });
-          router.push("/");
-        } else {
-          this.errorMessage = data.message || "Error registering the user.";
-        }
-      } catch (error) {
-        router.push("/login");
-      }
-    },
-    validateForm() {
-      if (!this.firstName || !this.lastName || !this.email || !this.password) {
-        this.errorMessage = "Please fill in all required fields.";
-        return false;
-      }
+  components: {
+    spinner,
   },
-
-    }}
+  data() {
+    return {
+      payload: {
+        FirstName: "",
+        LastName: "",
+        email: "",
+        UserName: "",
+        UserPwd: "",
+        userProfile:
+          "https://i.postimg.cc/mrpKtmZG/Screenshot-2023-09-07-124437-removebg-preview.png",
+      },
+    };
+  },
+  methods: {
+    register() {
+      this.loading = true;
+      try {
+        this.$store.dispatch("register", this.payload);
+        this.loading = false;
+      } catch (error) {
+        this.loading = false;
+      }
+    },
+  },
+};
 </script>
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Cinzel&display=swap");
@@ -187,9 +174,17 @@ p {
   color: white;
 }
 
+body {
+  overflow-y: hidden !important ;
+}
+
+.link {
+  text-decoration: none;
+}
+
 input {
-    font-family: "Cinzel", serif;
-    color: black;
+  font-family: "Cinzel", serif;
+  color: black;
 }
 
 p {
@@ -198,7 +193,7 @@ p {
 }
 
 form {
-  height: 34.1rem;
+  height: 100%;
 }
 .card {
   background-color: black;
@@ -220,5 +215,9 @@ body {
   box-shadow: 0 0 4px white;
   background-color: white;
   color: black;
+}
+html {
+  background-color: black !important;
+  height: 100%;
 }
 </style>

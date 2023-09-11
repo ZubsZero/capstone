@@ -7,23 +7,23 @@
           class="img-fluid" alt="Phone image">
       </div>
       <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-        <form>
-          <!-- Email input -->
+        <form method="post" >
           <div class="form-outline mb-4">
-            <input type="email" id="form1Example13" class="form-control form-control-lg" />
+            <input type="email" id="form1Example13" class="form-control form-control-lg" v-model="payload.email" required />
             <label class="form-label" for="form1Example13">Email address</label>
           </div>
 
-          <!-- Password input -->
           <div class="form-outline mb-4">
-            <input type="password" id="form1Example23" class="form-control form-control-lg" />
+            <input type="password" id="form1Example23" class="form-control form-control-lg" v-model="payload.UserPwd" required />
             <label class="form-label" for="form1Example23">Password</label>
           </div>
 
           
 
           <!-- Submit button -->
-          <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
+          <button type="button" @click.prevent="login" class="btn btn-primary btn-lg btn-block">
+            Sign in
+           </button>
 
         
 
@@ -36,6 +36,33 @@
   </div>
 </section>
 </template>
+<script>
+  export default {
+    data() {
+    return {
+      payload: {
+        email: "",
+        UserPwd: "",
+      },
+    };
+  },
+  computed: {
+    user() {
+      return this.$store.state.user;
+    },
+  },
+  methods: {
+    login() {
+      console.log("Well done")
+      this.$store.dispatch("login", this.payload);
+      
+    },
+  },
+  beforeCreate() {
+    this.$store.dispatch("fetchUsers");
+  }
+  }
+</script>
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Cinzel&display=swap");
 
