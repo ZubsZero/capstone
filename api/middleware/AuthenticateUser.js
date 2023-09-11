@@ -6,7 +6,7 @@ function createToken(user){
       email:user.email,
       UserPwd:user.UserPwd
   },
-  process.env.SECRET_KEY,
+  process.env.secret_key,
   {
       expiresIn:'1h'
   }
