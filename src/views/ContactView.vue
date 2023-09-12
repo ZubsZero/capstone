@@ -1,4 +1,5 @@
 <template> 
+<NavBar/>
     <div class="form">
       <form action="https://formspree.io/f/xzblrryk" method="POST">
         <div class="name-d">
@@ -29,20 +30,7 @@
           </div>
          
         </div>
-        <div class="reason-d">
-          <label for="select"
-            ><b>Reason for Contact:</b>
-          </label>
-          <div class="select">
-             <select name="reason for contact" class="select">
-              <option value="Service">Service</option>
-              <option value="Feedback">Feedback</option>
-              <option value="Complaint">Complaint</option>
-            </select> 
-          </div>
-            
-         
-        </div>
+        
         <div class="message-d">
           <label for="message" class="message"
             ><b>Your Message</b> 
@@ -59,11 +47,23 @@
         <button type="submit" class="submit">Send</button>
       </form>
     </div>
+    <Footer/>
   </template>
-  <script></script>
+  <script>
+import NavBar from  '../components/Navbar-comp.vue'
+import Footer from '../components/footer-comp.vue'
+export default {
+    components: {
+        NavBar,
+        Footer
+    }
+}
+
+</script>
   <style scoped>
   @import url("https://fonts.googleapis.com/css2?family=Julius+Sans+One&family=Monoton&display=swap");
-  
+@import url("https://fonts.googleapis.com/css2?family=Cinzel&display=swap");
+
   .hero {
     background-image: url("https://i.postimg.cc/7Zv5rJ2X/hassan-ouajbir-IYU-Ym-MRm7s-unsplash.jpg");
     background-repeat: no-repeat;
@@ -81,25 +81,20 @@
   h1 {
     color: rgb(0, 0, 0);
     font-size: 3rem;
-    font-family: "Monoton", cursive;
+    font-family: "Cinzel", serif;
+
   }
   
-  .yokohama {
-    color: rgba(179, 16, 16, 0.9);
-  }
   
-  .sub-text {
-    color: rgb(0, 0, 0);
-    font-size: 1.3rem;
-    font-family: "Julius Sans One", sans-serif;
-  }
   
   form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    
     margin: 3rem;
+    margin-top: 3.5rem ;
     gap: 3rem;
     font-family: "Julius Sans One", sans-serif;
   }
@@ -109,12 +104,24 @@
     height: 2rem;
     border: none;
     border-bottom: 1.4px solid;
+    background-color: transparent;
+    border-bottom: 1px solid white;
   }
   
   input {
     border: none;
     height: 2rem;
     border-bottom: 1.4px solid;
+    font-family: "Cinzel", serif;
+    background-color: transparent;
+    border-bottom: 1px solid white;
+
+  }
+
+  label {
+    margin-top: 1rem;
+    font-family: "Cinzel", serif;
+
   }
   
   .submit {
@@ -126,23 +133,24 @@
     border: none;
     background-color: black;
     color: #f8f8f8;
-    font-family: "Julius Sans One", sans-serif;
+    font-family: "Cinzel", serif;
+    border: 1px solid white;
   }
   
-  option {
-    font-family: "Julius Sans One", sans-serif;
-  }
+
   
-  select {
-    font-family: "Julius Sans One", sans-serif;
-  }
+ 
   
   .email {
     width: 14rem;
+    font-family: "Cinzel", serif;
+
   }
 
   b {
     color: white;
+    font-family: "Cinzel", serif;
+
   }
   
   .name-d {

@@ -11,6 +11,8 @@
            <h5 class="card-title">{{ $route.query.name }}</h5>
            <p class="card-text">
          <span>{{$route.query.category }}</span>
+         <span>{{$route.query.Brand }}</span>
+
        </p>
        <p class="card-text">
          <span> R{{ $route.query.price }}</span>

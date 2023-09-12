@@ -13,10 +13,10 @@
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <router-link to="/home" class="nav-link active">Home</router-link>
+            <router-link to="/home" class="nav-link active text-white">Home</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/about" class="nav-link" >About</router-link>
+            <router-link to="/about" class="nav-link">About</router-link>
           </li>
           <li class="nav-item">
             <router-link to="/products" class="nav-link" >Products</router-link>
@@ -33,6 +33,10 @@
           <li class="nav-item">
             <router-link to="/cart" class="nav-link" >Cart</router-link>
           </li>
+          <div class="btns">
+           <router-link to="/register" class="sign"><button class="sign-up">Sign-Up</button></router-link> 
+           <router-link to="/login" class="log"><button class="login">Login</button></router-link> 
+          </div>
         </ul>
       </div>
     </div>
@@ -53,14 +57,84 @@
     font-family: 'Cinzel', serif;
 }
 
-.nav-link {
-    color: rgb(255, 255, 255) !important;
-    font-family: 'Cinzel', serif !important;
+nav {
+  color:#ffffff !important;
 }
+
+.btns {
+  margin-top: 2rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center ;
+}
+
+.nav-link {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    position: relative;
+    font-size: 0.9rem;
+    font-family: 'Cinzel', serif;
+    margin-top: 0.5rem;
+
+}
+.login, .sign-up {
+  width: 5rem;
+  background-color: black;
+  color: white;
+  height: 3rem;
+  font-family: "Cinzel", serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login:hover, .sign-up:hover {
+  transition: 0.5s;
+  background-color: white;
+  box-shadow: 0 0 10px white;
+  color: black;
+}
+
+
+.nav-link.active {
+  color: white;
+}
+
+.nav-item {
+  color: white;
+}
+.sign, .log {
+  text-decoration: none;
+}
+
+.nav-link:after {
+    content: "";
+    position: absolute;
+    background-color: #ffffff;
+    height: 4px;
+    width: 0;
+    left: 0px;
+    bottom: -9px;
+    transition: 0.3s;
+}
+
+.nav-item {
+  color: white !important;
+}
+
+.nav-link:hover{
+    color: #ffffff;
+}
+.nav-link:hover:after{
+    width: 100%;
+}
+
 
 .btn-close {
   background-color: rgb(255, 255, 255) !important;
 }
+
 
 .navbar-toggler {
   background-color: rgb(255, 255, 255) !important;
