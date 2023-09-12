@@ -1,7 +1,12 @@
 <template>
+  <NavBar/>
     <body>
-     <div class="card" style="width: 18rem;">
-         <img :src="$route.query.picture" class="card-img-top" alt="...">
+     <div class="card" style="width: 25rem;">
+      <div class="flex">
+
+        <img :src="$route.query.picture" class="card-img-top" alt="...">
+
+      </div>
          <div class="card-body">
            <h5 class="card-title">{{ $route.query.name }}</h5>
            <p class="card-text">
@@ -17,10 +22,17 @@
        </div>
      </div>
     </body>
+    <Footer/>
  </template>
  
  <script>
+ import NavBar from '../components/Navbar-comp.vue'
+ import Footer from '../components/footer-comp.vue'
    export default {
+    components: {
+      NavBar,
+      Footer
+    },
   computed: {
     product() {
       return this.$store.state.product;
@@ -39,8 +51,17 @@
    
  }
 
- html {
+ body {
+  margin: 0;
+  padding: 0;
     background-color: 
     black !important;
+ }
+
+ .card {
+  margin-left: 35rem;
+  margin-top: 3.5rem;
+  width: 30rem ;
+  display: fle;
  }
  </style>

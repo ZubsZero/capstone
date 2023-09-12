@@ -35,7 +35,7 @@
                 <button @click="deleteProduct(product.ProdID)" class="delete">
                   Delete
                 </button>
-                <button class="delete">Edit</button>
+                <router-link class="edit" :to="{ name: 'Edit', params: { id: product.ProdID } }"><button class="delete">Edit</button></router-link>
               </div>
             </td>
           </tr>
@@ -59,7 +59,7 @@
           <h5>{{ user.email }}</h5>
         </div>
         <div class="user-btns">
-          <button @click="deleteUser(user.UserID)" class="delete">
+          <button @click="deleteUser(user.UserID)" class="user-del">
             Delete
           </button>
         </div>
@@ -114,6 +114,10 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Julius+Sans+One&family=Monoton&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cinzel&display=swap");
 
+.edit {
+  text-decoration: none;
+}
+
 .user-card {
   background-color: rgb(0, 0, 0);
   width: 24rem;
@@ -139,14 +143,25 @@ export default {
   color: white;
   height: 3rem;
   font-family: "Cinzel", serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+.user-del {
+  width: 5rem;
+  background-color: black;
+  color: white;
+  height: 3rem;
+  font-family: "Cinzel", serif;
+ 
+}
 .image {
   width: 12rem;
   height: 10rem;
 }
 
-.delete:hover {
+.delete:hover , .user-del:hover{
   transition: 0.5s;
   background-color: white;
   box-shadow: 0 0 10px white;

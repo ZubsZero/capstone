@@ -13,22 +13,25 @@
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <router-link to="/home" class="nav-link active" aria-current="page" href="#">Home</router-link>
+            <router-link to="/home" class="nav-link active">Home</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/about" class="nav-link" href="#">About</router-link>
+            <router-link to="/about" class="nav-link" >About</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/products" class="nav-link" href="#">Products</router-link>
+            <router-link to="/products" class="nav-link" >Products</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/contact" class="nav-link" href="#">Contact</router-link>
+            <router-link to="/contact" class="nav-link" >Contact</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/admin" class="nav-link" href="#">Admin</router-link>
+            <router-link to="/profileview" class="nav-link" >View Profile</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/cart" class="nav-link" href="#">Cart</router-link>
+            <router-link to="/admin" class="nav-link" >Admin</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/cart" class="nav-link" >Cart</router-link>
           </li>
         </ul>
       </div>
