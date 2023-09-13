@@ -1,22 +1,34 @@
 <template>
-    <div>
-      <div class="edit-Div">
-        <h1 class="h1">Edit</h1>
-        <router-link to="/admin" class="head">Back</router-link>
-        <form @submit.prevent="editProduct" class="edit-form">
-          <input type="text" v-model="edit.ProdName" placeholder="Name">
-          <input type="number" v-model="edit.quantity" placeholder="Quantity">
-          <input type="number" v-model="edit.Price" placeholder="Amount">
-          <input type="text" v-model="edit.category" placeholder="Category">
-          <input type="text" v-model="edit.ProdUrl" placeholder="Image URL">
-          <button type="submit" class="btn">Save</button>
-        </form>
-      </div>
+  <NavBar/>
+  <div>
+    <div class="edit-Div">
+      <h1 class="h1">Edit</h1>
+      <router-link to="/admin" class="head"
+        ><button class="button">Back</button></router-link
+      >
+      <form @submit.prevent="editProduct" class="edit-form">
+        <input type="text" v-model="edit.ProdName" placeholder="Name" />
+        <input type="number" v-model="edit.quantity" placeholder="Quantity" />
+        <input type="number" v-model="edit.Price" placeholder="Amount" />
+        <input type="text" v-model="edit.category" placeholder="Category" />
+        <input type="text" v-model="edit.Brand" placeholder="Brand" />
+        <input type="text" v-model="edit.ProdUrl" placeholder="Image URL" />
+        <button type="submit" class="btn">Save</button>
+      </form>
     </div>
-  </template>
-  
-  <script>
+  </div>
+  <br>
+  <Footer/>
+</template>
+
+<script>
+import NavBar from '../components/Navbar-comp.vue'
+import Footer from '../components/footer-comp.vue'
 export default {
+  components: {
+    NavBar,
+    Footer
+  },
   data() {
     return {
       edit: {
@@ -24,9 +36,10 @@ export default {
         ProdName: "",
         quantity: "",
         Price: "",
+        Brand:"",
         category: "",
         ProdUrl: ""
-      }
+      },
     };
   },
   props: ["id"],
@@ -40,26 +53,65 @@ export default {
         .catch((error) => {
           console.error("Error:", error);
         });
-    }
-  }
+    },
+  },
 };
-  </script>
-  
-  <style scoped>
-  .h1 {
-    color: #ffffff;
-  }
-  
-  .head {
-    color: #ffffff;
-  }
-  
-  .btn {
-    color: #ffffff;
-  }
+</script>
 
-  body {
-    background-color: black;
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Julius+Sans+One&family=Monoton&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cinzel&display=swap");
+
+.h1 {
+  color: #ffffff;
+  font-family: "Cinzel", serif;
+
+}
+
+.head {
+  color: #ffffff;
+}
+
+.btn {
+  color: #ffffff;
+}
+.button,.btn {
+  background-color: black;
+  color: white;
+  border: 1px solid;
+  height: 2.4rem;
+  width: 6rem;
+  margin-top: 2rem;
+  font-family: "Cinzel", serif;
+
+}
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+input {
+  margin-top: 2rem;
+  width: 25rem;
+}
+
+body {
+  background-color: black;
+  height: 100vh !important;
+}
+
+.button:hover, .btn:hover {
+  background-color: white;
+  color: black;
+  transition: 0.5s;
+  box-shadow: 0 0 5px white;
+}
+
+@media only screen and (max-width:300px){
+  input {
+    width: 15rem;
   }
-  </style>
-  
+}
+</style>

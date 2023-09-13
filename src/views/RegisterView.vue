@@ -1,5 +1,5 @@
 <template>
-  <section class="" style="background-color: #000000">
+  <section class="section" style="background-color: #000000">
     <div class="container">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-lg-12 col-xl-11">
@@ -169,18 +169,18 @@ label {
   color: white;
 }
 
+.section {
+  height: 44.2rem;
+}
+
 p {
   font-family: "Cinzel", serif;
   color: white;
 }
 
-body {
-  overflow-y: hidden !important ;
-}
 
-.link {
-  text-decoration: none;
-}
+
+
 
 input {
   font-family: "Cinzel", serif;
@@ -193,7 +193,7 @@ p {
 }
 
 form {
-  height: 100%;
+  height: 20rem;
 }
 .card {
   background-color: black;
@@ -219,5 +219,11 @@ body {
 html {
   background-color: black !important;
   height: 100%;
+}
+
+@media only screen and (max-width: 300px) {
+  .section {
+    height: 50rem;
+  }
 }
 </style>

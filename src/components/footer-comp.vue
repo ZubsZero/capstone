@@ -113,4 +113,8 @@ td {
   background-color: black !important;
   color: white !important;
 }
+
+a {
+  margin-left: 0.5rem;
+}
 </style>

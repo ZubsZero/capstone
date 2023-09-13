@@ -1,6 +1,6 @@
 <template>
   <div class="sortsearch">
-    <div class="searching and products">
+    <div class="searching-and-products">
       <div class="search">
         <div class="icon">
           <i class="bi bi-search"></i>
@@ -13,18 +13,15 @@
             placeholder="Name of item"
             v-model="searchInput"
           />
-          <button type="submit" class="btn" @click="filterProducts()">
-            <i class="bi bi-search"></i>
-          </button>
+      
         </div>
       </div>
 
-      <div class="products-container">
+      <div class="products-container" v-if="productsList && productsList.length > 0">
         <div
           class="products-card"
-          v-for="product in products"
+          v-for="product in filteredProductList"
           :key="product.ProdID"
-          :product="product"
         >
           <div class="image">
             <img :src="product.ProdUrl" alt="" class="img" />
@@ -46,7 +43,7 @@
                       category: product.category,
                       picture: product.ProdUrl,
                       brand: product.Brand,
-                    }
+                    },
                   }"
                 >
                   View More
@@ -56,6 +53,9 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="else" v-else>
+        <spinnerCompVue />
       </div>
     </div>
     <div class="sort-section">
@@ -69,7 +69,7 @@
             </select>
           </div>
           <div class="brand">
-            <label for="brand" class="label">Brand </label>
+            <label for="brand" class="label">Brand</label>
             <select name="brand" id="brand" class="brand">
               <option value="Casio">Casio</option>
               <option value="Fossil">Fossil</option>
@@ -79,9 +79,14 @@
           </div>
           <div class="price">
             <label for="price" class="label">Price</label>
-            <select name="price" id="price">
-              <option value="Lowest">Lowest</option>
-              <option value="Highest">Highest</option>
+            <select
+              name="price"
+              id="price"
+              v-model="selectedSort"
+              @change="sortProducts"
+            >
+              <option value="lowest">Lowest</option>
+              <option value="highest">Highest</option>
             </select>
           </div>
         </div>
@@ -89,16 +94,42 @@
     </div>
   </div>
 </template>
+
 <script>
+import spinnerCompVue from "../components/spinnerComp.vue";
+
 export default {
+  components: {
+    spinnerCompVue,
+  },
   data() {
     return {
-      products: [],
+      searchInput: "",
+      selectedSort: "lowest",
     };
   },
   computed: {
-    products() {
+    productsList() {
       return this.$store.state.products;
+    },
+    filteredProductList() {
+      const searchQuery = this.searchInput.toLowerCase();
+      return this.productsList.filter((product) => {
+        const productName = product.ProdName.toLowerCase();
+        const category = product.category.toLowerCase();
+        return (
+          productName.includes(searchQuery) || category.includes(searchQuery)
+        );
+      });
+    },
+  },
+  methods: {
+    sortProducts() {
+      if (this.selectedSort === "lowest") {
+        this.productsList.sort((a, b) => a.Price - b.Price);
+      } else if (this.selectedSort === "highest") {
+        this.productsList.sort((a, b) => b.Price - a.Price);
+      }
     },
   },
   mounted() {
@@ -120,9 +151,17 @@ export default {
   font-family: "Cinzel", serif;
 }
 
-.searching {
-  display: flex;
-  flex-direction: column;
+.else {
+  position: relative;
+  top: 30%;
+  left: 25%;
+}
+
+
+
+.single {
+  text-decoration: none;
+  color: black;
 }
 
 .sortsearch {
@@ -251,7 +290,7 @@ select {
   font-family: "Cinzel", serif;
 }
 
-.view-more {
+.view-more{
   background-color: rgb(255, 255, 255);
   color: black;
   font-family: "Cinzel", serif;
@@ -264,6 +303,12 @@ select {
   border: 0.3px solid rgb(255, 255, 255);
   color: rgb(255, 255, 255);
   box-shadow: 0 0 5px golden rod;
+}
+
+.single:hover {
+  transition: 0.5s;
+  background-color: black;
+  color: rgb(255, 255, 255);
 }
 
 .addtocart {
@@ -280,5 +325,54 @@ select {
   border: 0.3px solid rgb(255, 255, 255);
   color: rgb(255, 255, 255);
   box-shadow: 0 0 5px golden rod;
+}
+
+@media only screen and (max-width:300px) {
+  .products-container {
+  position: relative;
+  left: 0%;
+  margin: 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+.sortsearch {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 0rem;
+}
+.search {
+  display: flex;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  gap: 0.1rem;
+  color: white;
+  margin-left: 0rem;
+  font-family: "Cinzel", serif;
+}
+
+.type-s {
+  width: 11rem;
+}
+
+.icon {
+  width: 1.4rem;
+  margin-top: 0rem;
+}
+
+.sort-body {
+  margin-top: 5.4rem;
+  color: white;
+  background-color: rgb(0, 0, 0);
+  height: 17rem;
+  width: 18.5rem;
+  border: 1px solid white;
+}
+
+.else {
+  margin-right: 9rem;
+}
+
 }
 </style>

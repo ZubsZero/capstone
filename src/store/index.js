@@ -170,6 +170,7 @@ export default createStore({
     LogOut(context) {
       context.commit("setUser");
       cookies.remove("MannUser");
+      localStorage.removeItem("user");
     },
 
     async saveEdit(context, edit) {
