@@ -19,7 +19,7 @@
        </p>
        <div class="card-footer text-body-secondary">
          <router-link to="/products" class="btn">Back</router-link>
-         <button class="btn" type="button" @click="addToCart(product)">Add To Cart</button>
+         <button class="btn" type="button" @click="addToCart()">Add To Cart</button>
          </div>
        </div>
      </div>
@@ -50,17 +50,22 @@
   },
 
   methods: {
-    addToCart(){
-      const data = JSON.parse(localStorage.getItem('cart')) || []
+    addToCart() {
+      const product = {
+        id: this.$route.query.id,
+        name: this.$route.query.name,
+        ProdUrl: this.$route.query.picture,
+        category: this.$route.query.category,
+        Brand: this.$route.query.Brand,
+        price: this.$route.query.price,
+      };
 
-      const newData = {key: this.product}
-
-      data.push(newData)
-
-      localStorage.setItem('cart', JSON.stringify(data))
+      const data = JSON.parse(localStorage.getItem('cart')) || [];
+      data.push(product);
+      localStorage.setItem('cart', JSON.stringify(data));
     },
+  },
   }
-};
  </script>
  
  <style scoped>

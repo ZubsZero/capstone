@@ -21,28 +21,30 @@
 <script>
 export default {
   computed: {
-      cart() {
-      const cart = JSON.parse(localStorage.getItem('cart')) || [
-                  ]
-      return cart
+    cart() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      return cart;
     },
-
-
-  number() {
-      const cart = JSON.parse(localStorage.getItem('cart'))
-      const total = cart.reduce((total, item) => total + item.key.Price , 0)
-      return total
-  }
+    cartTotal() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      return cart.reduce((total, item) => total + item.Price * item.quantity, 0);
+    },
   },
   methods: {
     removeFromCart(product_id) {
       const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const updatedCart = cart.filter((item) => item.key.ProdID !== product_id);
-    localStorage.setItem('cart', JSON.stringify(updatedCart));
-    location.reload()
+      const updatedCart = cart.filter((item) => item.ProdID !== product_id);
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
     },
     updateQuantity(item) {
-      this.$store.dispatch('updateQuantity', { product_id: item.id, quantity: item.quantity });
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const updatedCart = cart.map((cartItem) => {
+        if (cartItem.ProdID === item.ProdID) {
+          cartItem.quantity = item.quantity;
+        }
+        return cartItem;
+      });
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
     },
   },
 };
