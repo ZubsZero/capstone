@@ -91,4 +91,38 @@ h5, p {
     font-family: 'Cinzel', serif;
 
 }
+
+@media only screen and (max-width:300px){
+  .carousel.slide.fade {
+    height: 25rem !important;
+  
+  }
+
+
+.carousel-item {
+    height: 25rem !important;
+}
+.d-block.w-100 {
+    height: 25rem !important;
+    background-image: url(https://i.postimg.cc/Gtm0XnNw/wp5433138-g-shock-watch-wallpapers.jpg);
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-top: 1.4rem;
+}
+.d-block.w-100.three {
+    height: 25rem !important;
+    background-image: url(https://i.postimg.cc/Rh9QcMW9/wp3809279-seiko-wallpapers.jpg);
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.d-block.w-100.two {
+    height: 25rem !important;
+    background-image: url(https://i.postimg.cc/d1bFtxNz/wallpaperflare-com-wallpaper-4.jpg);
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+}
 </style>

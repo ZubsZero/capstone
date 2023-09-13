@@ -38,7 +38,6 @@
                         >
                       </div>
                     </div>
-
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
@@ -67,7 +66,6 @@
                         >
                       </div>
                     </div>
-
                     <div class="d-flex flex-row align-items-center mb-0">
                       <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
@@ -104,10 +102,7 @@
                         :disabled="loading"
                       >
                         <span v-if="!loading">Register</span>
-                        <spinner v-else>
-                          <spinner/>
-                        </spinner>
-
+                        <spinner v-else></spinner>
                       </button>
                     </div>
                   </form>
@@ -129,8 +124,10 @@
     </div>
   </section>
 </template>
+
 <script>
 import spinner from "@/components/spinnerComp.vue";
+
 export default {
   components: {
     spinner,
@@ -146,21 +143,34 @@ export default {
         userProfile:
           "https://i.postimg.cc/mrpKtmZG/Screenshot-2023-09-07-124437-removebg-preview.png",
       },
+      loading: false,
     };
   },
   methods: {
-    register() {
+    async register() {
       this.loading = true;
       try {
-        this.$store.dispatch("register", this.payload);
-        this.loading = false;
+        await this.$store.dispatch("register", this.payload);
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+
+        this.resetForm();
       } catch (error) {
+        console.error(error);
+      } finally {
         this.loading = false;
       }
+    },
+    resetForm() {
+      this.payload.FirstName = "";
+      this.payload.LastName = "";
+      this.payload.email = "";
+      this.payload.UserName = "";
+      this.payload.UserPwd = "";
     },
   },
 };
 </script>
+
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Cinzel&display=swap");
 
@@ -178,10 +188,6 @@ p {
   color: white;
 }
 
-
-
-
-
 input {
   font-family: "Cinzel", serif;
   color: black;
@@ -195,9 +201,11 @@ p {
 form {
   height: 20rem;
 }
+
 .card {
   background-color: black;
 }
+
 body {
   background-color: black !important;
 }
@@ -216,6 +224,7 @@ body {
   background-color: white;
   color: black;
 }
+
 html {
   background-color: black !important;
   height: 100%;

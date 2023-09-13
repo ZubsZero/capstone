@@ -202,4 +202,53 @@
   text-align: center;
   font-family: "Cinzel", serif;
 }
+
+@media only screen and (max-width:300px) {
+ 
+  .template {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+
+.card-info {
+  position: relative;
+  bottom: 100%;
+  height: 15rem;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.header-card {
+  width: 100%;
+  height: 35rem;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 0 500px black inset;
+}
+.card1,
+.card2,
+.card3,
+.card4 {
+  width: 100%;
+  height: 15rem;
+  border: 1px solid rgb(255, 255, 255);
+  box-shadow: 0 0 2px rgb(255, 255, 255);
+}
+.cards {
+  display: grid;
+  grid-template-columns: 1fr ;
+  gap: 1rem;
+  margin: 1rem;
+  place-items: center;
+}
+.card2,
+.card4 {
+  margin-left: 0rem;
+}
+}
 </style>

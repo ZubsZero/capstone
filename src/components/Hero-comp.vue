@@ -49,4 +49,42 @@ p {
 
 }
 
+@media only screen and (max-width: 300px) {
+  .display-4 {
+    font-family: 'Cinzel', serif;
+    color: rgb(255, 255, 255);
+    font-size: 2.4rem ;
+    position: relative;
+    top: 20% ;
+
+}
+.container {
+    border-left:5px solid rgb(255, 255, 255) ;
+    width: 100%;
+    height: 11rem;
+    left: 0%;
+   
+    
+}
+.jumbotron {
+    background-color: black;
+    color: white;
+    height: 17rem;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+p {
+  margin-top: 3rem;
+  font-size: 0.9rem;
+}
+.image {
+  width: 0;
+  height: 0;
+}
+
+
+}
+
 </style>
