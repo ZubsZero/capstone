@@ -18,6 +18,8 @@ export default createStore({
     token: null,
     msg: null,
     add: null,
+    cartItems: []
+
   },
   getters: {},
   mutations: {
@@ -48,7 +50,9 @@ export default createStore({
     setAdd(state, data) {
       state.add = data;
     },
-  },
+    removeFromCart(state, ProdID) {
+      state.cartItems = state.cartItems.filter(item => item.id !== ProdID);
+  }},
   actions: {
     async fetchUsers(context) {
       try {
@@ -173,6 +177,11 @@ export default createStore({
       localStorage.removeItem("user");
     },
 
+    removeFromCart(state,product) {
+      statusbar.cartItems =- state.cartItems.filter(item => item.id !== product
+        )
+    },
+
     async saveEdit(context, edit) {
       try {
         const { data } = await axios.patch(
@@ -185,5 +194,9 @@ export default createStore({
         console.error("Error updating product:", e);
       }
     },
+    addToCart({ commit }, item) {
+      commit('addToCart', item);
+    },
+    
   },
 });

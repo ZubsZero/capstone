@@ -19,7 +19,7 @@
        </p>
        <div class="card-footer text-body-secondary">
          <router-link to="/products" class="btn">Back</router-link>
-         <router-link to="/checkout" class="btn">Add To Cart</router-link>
+         <button class="btn" type="button" @click="addToCart(product)">Add To Cart</button>
          </div>
        </div>
      </div>
@@ -35,14 +35,31 @@
       NavBar,
       Footer
     },
+    data: () => {
+    return {
+      cart: []
+    }},
   computed: {
     product() {
       return this.$store.state.product;
     },
   },
   mounted(){
+    const ProdID = this.$route.params.ProdID;
     this.$store.dispatch('fetchProduct', this.$route.params.ProdID)
   },
+
+  methods: {
+    addToCart(){
+      const data = JSON.parse(localStorage.getItem('cart')) || []
+
+      const newData = {key: this.product}
+
+      data.push(newData)
+
+      localStorage.setItem('cart', JSON.stringify(data))
+    },
+  }
 };
  </script>
  

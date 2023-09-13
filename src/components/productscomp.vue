@@ -49,7 +49,6 @@
                   View More
                 </router-link>
               </button>
-              <button type="button" class="addtocart">Add to cart</button>
             </div>
           </div>
         </div>

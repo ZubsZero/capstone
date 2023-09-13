@@ -1,51 +1,85 @@
 <template>
-    <div>
-      <NavBar />
-      <div class="container">
-        <h1>Your Cart</h1>
-        <div v-if="cartItems.length === 0">
-          <p>Your cart is empty.</p>
-        </div>
-        <div v-else>
-          <ul>
-            <li v-for="item in cartItems" :key="item.id">
-              {{ item.name }} - Quantity: {{ item.quantity }} - Price: ${{ item.price }}
-            </li>
-          </ul>
-          <p>Total: ${{ cartTotal }}</p>
-          <button @click="checkout">Checkout</button>
-        </div>
-      </div>
-      <Footer />
-    </div>
-  </template>
-  
-  <script>
-  import NavBar from '../components/Navbar-comp.vue'
-  import Footer from '../components/footer-comp.vue'
-  
-  export default {
-    components: {
-      NavBar,
-      Footer
+  <div class="shopping-cart">
+    <h2>Your Shopping Cart:</h2>
+    <ul v-if="cart.length" class="cart-items">
+      <li v-for="item in cart" :key="item.ProdID" class="cart-item">
+          <img :src="item.key.ProdUrl" style="width: 10rem" alt="">
+        {{ item.key.ProdName }} - Price: R{{ item.key.Price }} - Quantity:
+        <input
+          type="number"
+          v-model="item.key.quantity"
+          @input="updateQuantity(item)"
+          class="quantity-input"
+        />
+        <button @click="removeFromCart(item.key.ProdID)" class="remove-button">Remove</button>
+      </li>
+    </ul>
+    <p v-else class="empty-cart-message">No items in the cart.</p>
+    <p class="cart-total">Total: R{{ number }}</p>
+  </div>
+</template>
+<script>
+export default {
+  computed: {
+      cart() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [
+                  ]
+      return cart
     },
-    computed: {
-      cartItems() {
-      
-      },
-      cartTotal() {
-        
-      },
-    },
-    methods: {
-      checkout() {
-    
-      },
-    },
+
+
+  number() {
+      const cart = JSON.parse(localStorage.getItem('cart'))
+      const total = cart.reduce((total, item) => total + item.key.Price , 0)
+      return total
   }
-  </script>
-  
-  <style scoped>
-  /* Add your cart view styles here */
-  </style>
-  
+  },
+  methods: {
+    removeFromCart(product_id) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const updatedCart = cart.filter((item) => item.key.ProdID !== product_id);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+    location.reload()
+    },
+    updateQuantity(item) {
+      this.$store.dispatch('updateQuantity', { product_id: item.id, quantity: item.quantity });
+    },
+  },
+};
+</script>
+<style scoped>
+.shopping-cart {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  color: white;
+}
+.cart-items {
+  list-style: none;
+  padding: 0;
+}
+.cart-item {
+  margin-bottom: 10px;
+}
+.quantity-input {
+  width: 50px;
+}
+.remove-button {
+  background-color: #FF5733;
+  color: #fff;
+  border: none;
+  padding: 1px 10px;
+  cursor: pointer;
+  width: 5rem;
+}
+.remove-button:hover {
+  background-color: #E5482E;
+}
+.empty-cart-message {
+  font-style: italic;
+}
+.cart-total {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+</style>
