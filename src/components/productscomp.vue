@@ -72,7 +72,8 @@
           </div>
           <div class="brand">
             <label for="brand" class="label">Brand</label>
-            <select name="brand" id="brand" class="brand" >
+            <select name="brand" id="brand" class="brand" v-model="selectedBrand" @change="filterProductsByBrand">
+              <option value="">All Brands</option>
               <option value="Casio">Casio</option>
               <option value="Fossil">Fossil</option>
               <option value="Seiko">Seiko</option>
@@ -108,6 +109,7 @@ export default {
     return {
       searchInput: "",
       selectedSort: "lowest",
+      selectedBrand: "",
     };
   },
   computed: {
@@ -119,8 +121,10 @@ export default {
       return this.productsList.filter((product) => {
         const productName = product.ProdName.toLowerCase();
         const category = product.category.toLowerCase();
+        const brand = product.Brand.toLowerCase(); 
         return (
-          productName.includes(searchQuery) || category.includes(searchQuery)
+          (productName.includes(searchQuery) || category.includes(searchQuery)) &&
+          (this.selectedBrand === "" || brand === this.selectedBrand) 
         );
       });
     },
@@ -132,7 +136,11 @@ export default {
       } else if (this.selectedSort === "highest") {
         this.productsList.sort((a, b) => b.Price - a.Price);
       }
-    }
+    },
+    filterProductsByBrand() {
+     
+      console.log("Selected Brand:", this.selectedBrand);
+    },
     
   },
   mounted() {
