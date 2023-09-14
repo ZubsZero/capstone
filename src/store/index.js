@@ -197,6 +197,8 @@ export default createStore({
     addToCart({ commit }, item) {
       commit('addToCart', item);
     },
+
+    
     
   },
 });

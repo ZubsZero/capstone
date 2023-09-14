@@ -20,7 +20,7 @@
             <p class="h1">Tag Heuer</p>
             <p class="price">R300</p>
             <div class="btns">
-              <button class="btn">View More</button>
+              <router-link to="/products"><button class="btn">View More</button></router-link>
             </div>
           </div>
         </div>
@@ -38,7 +38,7 @@
             <p class="h1">Casio G-Shock</p>
             <p class="price">R300</p>
             <div class="btns">
-              <button class="btn">View More</button>
+              <router-link to="/products"><button class="btn">View More</button></router-link>
             </div>
           </div>
         </div>
@@ -56,7 +56,7 @@
             <p class="h1">Fossil</p>
             <p class="price">R300</p>
             <div class="btns">
-              <button class="btn">View More</button>
+              <router-link to="/products"><button class="btn">View More</button></router-link>
             </div>
           </div>
         </div>
@@ -74,7 +74,7 @@
             <p class="h1">Seiko</p>
             <p class="price">R300</p>
             <div class="btns">
-              <button class="btn">View More</button>
+              <router-link to="/products"><button class="btn">View More</button></router-link>
             </div>
           </div>
         </div>

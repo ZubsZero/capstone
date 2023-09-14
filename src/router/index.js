@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import introView from "../views/intropageView.vue";
 
+
 const routes = [
   {
     path: "/",
@@ -81,6 +82,7 @@ const routes = [
     component: () => import("../views/EditProductView.vue"),
   },
 ];
+
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),

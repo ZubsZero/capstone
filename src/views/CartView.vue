@@ -3,21 +3,23 @@
     <h2>Your Shopping Cart:</h2>
     <ul v-if="cart.length" class="cart-items">
       <li v-for="item in cart" :key="item.ProdID" class="cart-item">
-          <img :src="item.key.ProdUrl" style="width: 10rem" alt="">
-        {{ item.key.ProdName }} - Price: R{{ item.key.Price }} - Quantity:
+        <img :src="item.ProdUrl" style="width: 10rem" alt="">
+        {{ item.name }} - Price: R{{ item.price }} - Quantity:
         <input
           type="number"
-          v-model="item.key.quantity"
+          v-model="item.quantity"
           @input="updateQuantity(item)"
           class="quantity-input"
         />
-        <button @click="removeFromCart(item.key.ProdID)" class="remove-button">Remove</button>
+        <button @click="removeFromCart(item.ProdID)" class="remove-button">Remove</button>
       </li>
     </ul>
     <p v-else class="empty-cart-message">No items in the cart.</p>
-    <p class="cart-total">Total: R{{ number }}</p>
+    <p class="cart-total">Total: R{{ cartTotal }}</p>
   </div>
 </template>
+
+
 <script>
 export default {
   computed: {
@@ -27,28 +29,38 @@ export default {
     },
     cartTotal() {
       const cart = JSON.parse(localStorage.getItem('cart')) || [];
-      return cart.reduce((total, item) => total + item.Price * item.quantity, 0);
+      return cart.reduce((total, item) => total + item.price * item.quantity, 0);
     },
   },
   methods: {
     removeFromCart(product_id) {
-      const cart = JSON.parse(localStorage.getItem('cart')) || [];
-      const updatedCart = cart.filter((item) => item.ProdID !== product_id);
-      localStorage.setItem('cart', JSON.stringify(updatedCart));
-    },
-    updateQuantity(item) {
-      const cart = JSON.parse(localStorage.getItem('cart')) || [];
-      const updatedCart = cart.map((cartItem) => {
-        if (cartItem.ProdID === item.ProdID) {
-          cartItem.quantity = item.quantity;
-        }
-        return cartItem;
-      });
-      localStorage.setItem('cart', JSON.stringify(updatedCart));
-    },
-  },
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  console.log('Cart:', cart);
+
+  const updatedCart = cart.filter((item) => item.ProdID !== product_id);
+  console.log('Updated Cart:', updatedCart);
+
+  localStorage.setItem('cart', JSON.stringify(updatedCart));
+
+  window.location.reload();
+},
+
+  updateQuantity(updatedItem) {
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const index = cart.findIndex((item) => item.ProdID === updatedItem.ProdID);
+  
+  if (index !== -1) {
+    cart[index].quantity = updatedItem.quantity;
+    
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }
+},
+
+},
+
 };
 </script>
+
 <style scoped>
 .shopping-cart {
   max-width: 600px;

@@ -30,6 +30,7 @@
             <h4 class="h4">{{ product.ProdName }}</h4>
             <h4 class="h4">R {{ product.Price }}</h4>
             <h4 class="h4">{{ product.Brand }}</h4>
+            <h4 class="none">{{ product.quantity }}</h4>
             <div class="products-btn">
               <button class="view-more">
                 <router-link
@@ -38,6 +39,8 @@
                     name: 'product',
                     params: { ProdID: product.ProdID },
                     query: {
+                      ProdID: product.ProdID,
+                      quantity: product.quantity,
                       name: product.ProdName,
                       price: product.Price,
                       category: product.category,
@@ -148,6 +151,11 @@ export default {
   color: white;
   margin-left: 26rem;
   font-family: "Cinzel", serif;
+}
+
+.none {
+  content: "";
+  font-size: 0rem;
 }
 
 .else {
