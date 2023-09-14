@@ -45,6 +45,8 @@
               <span v-if="!loading">Sign in</span>
               <spinner v-else></spinner>
             </button>
+            <span class="span">Or</span>
+            <router-link to="/register"><button class="btn btn-primary btn-lg btn-block">Sign Up</button></router-link>
           </form>
         </div>
       </div>
@@ -104,11 +106,18 @@ label {
   font-family: 'Cinzel', serif;
 }
 
+.span {
+  color: white;
+  font-family: 'Cinzel', serif;
+  margin-left : 1rem;
+}
+
 .btn {
   color: white;
   background-color: black;
   border: 1px solid white;
   font-family: 'Cinzel', serif;
+  margin-left: 1rem;
 }
 
 .h1 {
@@ -135,6 +144,14 @@ label {
     height: 14rem;
     margin-top: 0;
     padding: 0;
+  }
+
+  .span {
+    margin-left: 0.3rem;
+  }
+
+  .btn{
+    margin-left: 0.3rem;
   }
 }
 </style>

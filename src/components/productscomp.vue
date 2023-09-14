@@ -72,7 +72,7 @@
           </div>
           <div class="brand">
             <label for="brand" class="label">Brand</label>
-            <select name="brand" id="brand" class="brand">
+            <select name="brand" id="brand" class="brand" >
               <option value="Casio">Casio</option>
               <option value="Fossil">Fossil</option>
               <option value="Seiko">Seiko</option>
@@ -132,7 +132,8 @@ export default {
       } else if (this.selectedSort === "highest") {
         this.productsList.sort((a, b) => b.Price - a.Price);
       }
-    },
+    }
+    
   },
   mounted() {
     this.$store.dispatch("fetchProducts");

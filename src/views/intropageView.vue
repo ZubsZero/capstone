@@ -19,7 +19,7 @@
             <h2>Have You already got an account </h2>
             <p>Click on login to redirect you to the login page</p>
             <div class="buttons">
-                <router-link to="/login" class="link"><div class="button">Sign Up</div></router-link>
+                <router-link to="/login" class="link"><div class="button">Log In</div></router-link>
             </div>
         </div>
         <div class="image">

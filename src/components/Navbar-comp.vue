@@ -2,6 +2,18 @@
   <nav class="navbar bg-body-tertiary fixed-top">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">WatchTime</a>
+      <div class="user">
+        <div class="img">
+          <img
+            src="https://i.postimg.cc/mrpKtmZG/Screenshot-2023-09-07-124437-removebg-preview.png"
+            alt=""
+            class="defaultimg"
+          />
+        </div>
+        <div class="username">
+          <span>{{ $store.state.user?.Firstname }}</span>
+        </div>
+      </div>
       <button
         class="navbar-toggler"
         type="button"
@@ -50,19 +62,22 @@
                 >View Profile</router-link
               >
             </li>
-            <li class="nav-item">
-              <router-link to="/admin" v-show="userRole === 'admin'" class="nav-link">Admin</router-link>
+            <li class="nav-item" v-if="isAdmin !== null && isAdmin">
+              <router-link to="/admin" class="nav-link">Admin</router-link>
             </li>
             <li class="nav-item">
               <router-link to="/cart" class="nav-link">Cart</router-link>
             </li>
-            <div class="btns">
-              <router-link to="/register" class="sign"
-                ><button class="sign-up">Sign-Up</button></router-link
-              >
-              <router-link to="/login" class="log"
-                ><button class="login">Login</button></router-link
-              >
+            <div class="btns" v-if="!SignedIn">
+              <router-link to="/register" class="sign">
+                <button class="sign-up">Sign-Up</button>
+              </router-link>
+              <router-link to="/login" class="log">
+                <button class="login">Login</button>
+              </router-link>
+            </div>
+            <div class="else" v-else>
+              <button @click="logout" class="logout">Log out</button>
             </div>
           </ul>
         </div>
@@ -70,21 +85,43 @@
     </div>
   </nav>
 </template>
+
 <script>
 export default {
   computed: {
     userRole() {
-      return this.$store.state.user.UserRole;
+      const user = this.$store.state.user;
+      return user ? user.UserRole : null;
     },
     isAdmin() {
       return this.userRole === "admin";
+    },
+    SignedIn() {
+      const userData = localStorage.getItem("user");
+      return !!userData;
     },
   },
   mounted() {
     this.$store.dispatch("fetchUsers");
   },
+  created() {
+    const saveData = localStorage.getItem("user");
+    if (saveData) {
+      this.user = JSON.parse(saveData);
+    }
+    const data = JSON.parse(localStorage.getItem("user"));
+    if (data) {
+      this.$store.commit("setUser", data);
+    }
+  },
+  methods: {
+    logout() {
+      localStorage.removeItem("user");
+      this.$store.commit("setUser", null);
+      this.$router.push("/login");
+    },
+  },
 };
-
 </script>
 
 <style>
@@ -98,8 +135,33 @@ export default {
   font-family: "Cinzel", serif;
 }
 
+.logout {
+  width: 5rem;
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  height: 3rem;
+  font-family: "Cinzel", serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8.5rem;
+  margin-top: 1rem;
+}
+
 nav {
   color: #ffffff !important;
+}
+
+.defaultimg {
+  width: 3rem;
+}
+
+.user {
+  display: flex;
+}
+
+.username {
+  margin-top: 0.5rem;
 }
 
 .btns {
@@ -131,7 +193,8 @@ nav {
 }
 
 .login:hover,
-.sign-up:hover {
+.sign-up:hover,
+.logout:hover {
   transition: 0.5s;
   background-color: white;
   box-shadow: 0 0 10px white;
@@ -192,5 +255,26 @@ nav {
 .offcanvas-title {
   font-family: "Cinzel", serif;
   color: rgb(255, 255, 255) !important;
+}
+
+@media only screen and (max-width: 300px) {
+  .navbar-brand {
+    font-family: "Cinzel", serif;
+    color: rgb(255, 255, 255) !important;
+    display: none;
+  }
+  .logout {
+  width: 5rem;
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  height: 3rem;
+  font-family: "Cinzel", serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 5.5rem;
+  margin-top: 1rem;
+}
+  
 }
 </style>
