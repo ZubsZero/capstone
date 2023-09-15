@@ -14,7 +14,7 @@
           <br />
           <form method="post">
             <div class="form-outline mb-4">
-              <input
+               <input
                 type="email"
                 id="form1Example13"
                 class="form-control form-control-lg"

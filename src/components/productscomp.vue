@@ -15,7 +15,7 @@
           />
       
         </div>
-      </div>
+      </div>]
 
       <div class="products-container" v-if="productsList && productsList.length > 0">
         <div
@@ -63,21 +63,15 @@
     <div class="sort-section">
       <div class="sort-body">
         <div class="sort-info">
-          <div class="category">
-            <label for="category" class="label">Category</label>
-            <select name="category" id="category" class="category">
-              <option value="Formal">Formal</option>
-              <option value="Casual">Casual</option>
-            </select>
-          </div>
+        
           <div class="brand">
             <label for="brand" class="label">Brand</label>
             <select name="brand" id="brand" class="brand" v-model="selectedBrand" @change="filterProductsByBrand">
               <option value="">All Brands</option>
-              <option value="Casio">Casio</option>
-              <option value="Fossil">Fossil</option>
-              <option value="Seiko">Seiko</option>
-              <option value="Tag Heuer">Tag Heuer</option>
+              <option value="casio">Casio</option>
+              <option value="fossil">Fossil</option>
+              <option value="seiko">Seiko</option>
+              <option value="tag heuer">Tag Heuer</option>
             </select>
           </div>
           <div class="price">
@@ -97,7 +91,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import spinnerCompVue from "../components/spinnerComp.vue";
 
@@ -118,36 +111,45 @@ export default {
     },
     filteredProductList() {
       const searchQuery = this.searchInput.toLowerCase();
-      return this.productsList.filter((product) => {
+      let filteredList = this.productsList.filter((product) => {
         const productName = product.ProdName.toLowerCase();
         const category = product.category.toLowerCase();
-        const brand = product.Brand.toLowerCase(); 
+        const brand = product.Brand.toLowerCase();
         return (
           (productName.includes(searchQuery) || category.includes(searchQuery)) &&
-          (this.selectedBrand === "" || brand === this.selectedBrand) 
+          (this.selectedBrand === "" || brand === this.selectedBrand)
         );
       });
+
+      if (this.selectedSort === "lowest") {
+        filteredList = filteredList.sort((a, b) => a.Price - b.Price);
+      } else if (this.selectedSort === "highest") {
+        filteredList = filteredList.sort((a, b) => b.Price - a.Price);
+      }
+
+      return filteredList;
     },
   },
   methods: {
     sortProducts() {
-      if (this.selectedSort === "lowest") {
-        this.productsList.sort((a, b) => a.Price - b.Price);
-      } else if (this.selectedSort === "highest") {
-        this.productsList.sort((a, b) => b.Price - a.Price);
-      }
     },
     filterProductsByBrand() {
-     
-      console.log("Selected Brand:", this.selectedBrand);
     },
-    
+    getBrands() {
+      const brandsSet = new Set();
+      this.productsList.forEach((product) => {
+        brandsSet.add(product.Brand);
+      });
+      return Array.from(brandsSet);
+    },
   },
   mounted() {
     this.$store.dispatch("fetchProducts");
   },
 };
 </script>
+
+
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Cinzel&display=swap");

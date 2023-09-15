@@ -18,7 +18,6 @@
               <span><strong>Email: </strong>{{ $store.state.user?.email }}</span> <br> <br>
             </div>
             <div class="d-flex justify-content-between">
-              <update-user-comp class="btn edit-btn" />
               <button type="submit" class="btn del-btn" @click="deleteUser(user.UserID)">Delete Account</button>
             </div>
           </div>
@@ -64,5 +63,26 @@
   span {
     font-family: "Cinzel", serif;
 
+  }
+
+  .btn {
+    background-color: black ;
+    color: white;
+    font-family: "Cinzel", serif;
+
+  }
+
+  @media only screen and (max-width: 300px) {
+    .card {
+      width: 100% !important;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      right: 14%;
+    }
   }
 </style>
