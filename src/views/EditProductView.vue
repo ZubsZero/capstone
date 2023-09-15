@@ -48,7 +48,7 @@ export default {
       this.$store
         .dispatch("saveEdit", this.edit)
         .then(() => {
-          // this.$router.push("/admin");
+          this.$router.push("/admin");
         })
         .catch((error) => {
           console.error("Error:", error);

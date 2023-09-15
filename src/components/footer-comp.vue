@@ -10,14 +10,10 @@
             <h5 class="text-uppercase mb-4">About company</h5>
 
             <p>
-              At vero eos et accusamus et iusto odio dignissimos ducimus qui
-              blanditiis praesentium voluptatum deleniti atque corrupti.
+             WatchTime is a company that sells top quality watches ranging from formal to informal to many prices
             </p>
 
-            <p>
-              Blanditiis praesentium voluptatum deleniti atque corrupti quos
-              dolores et quas molestias.
-            </p>
+          
 
             <div class="mt-4">
               <!-- Facebook -->
