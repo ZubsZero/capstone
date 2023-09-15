@@ -15,7 +15,7 @@
           />
       
         </div>
-      </div>]
+      </div>
 
       <div class="products-container" v-if="productsList && productsList.length > 0">
         <div
@@ -63,7 +63,6 @@
     <div class="sort-section">
       <div class="sort-body">
         <div class="sort-info">
-        
           <div class="brand">
             <label for="brand" class="label">Brand</label>
             <select name="brand" id="brand" class="brand" v-model="selectedBrand" @change="filterProductsByBrand">
@@ -71,7 +70,7 @@
               <option value="casio">Casio</option>
               <option value="fossil">Fossil</option>
               <option value="seiko">Seiko</option>
-              <option value="tag heuer">Tag Heuer</option>
+              <option value="tag">Tag Heuer</option>
             </select>
           </div>
           <div class="price">

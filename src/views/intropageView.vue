@@ -123,6 +123,13 @@ background-color: rgb(0, 0, 0);
 
     .image-2 {
         height: 30rem;
+        width: 100%;
+
     }
+
+    .image {
+    width: 100%;
+    
+}
 }
 </style>

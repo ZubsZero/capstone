@@ -18,7 +18,7 @@
               <span><strong>Email: </strong>{{ $store.state.user?.email }}</span> <br> <br>
             </div>
             <div class="d-flex justify-content-between">
-              <button type="submit" class="btn del-btn" @click="deleteUser(user.UserID)">Delete Account</button>
+              <button type="submit" class="btn del-btn" @click="deleteUser(userID)">Delete Account</button>
             </div>
           </div>
         </div>
@@ -43,8 +43,35 @@
       if (data) {
         this.$store.commit("setUser", data)
       }
+    },
+    data() {
+    return {
+      products: [],
+    };
+  },
+
+   computed: {
+      users(){
+          return this.$store.state.users;
+      }
+    },
+    mounted() {
+      this.$store.dispatch("fetchUsers");
+    },
+    methods: {
+
+      deleteUser() {
+    
+        localStorage.removeItem('user'),
+        this.$router.push('/login');
+
+   
+      
+  },
+     }
     }
-  }
+
+  
   </script>
   <style scoped>
   @import url("https://fonts.googleapis.com/css2?family=Julius+Sans+One&family=Monoton&display=swap");

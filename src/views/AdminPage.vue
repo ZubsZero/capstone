@@ -62,6 +62,8 @@
           <button @click="deleteUser(user.UserID)" class="user-del">
             Delete
           </button>
+          <router-link class="edit" :to="{ name: 'User', params: { id: user.UserID } }"><button class="delete">Edit</button></router-link>
+
         </div>
       </div>
     </div>
@@ -198,6 +200,12 @@ td {
   color: white;
   border: 3px solid black;
   font-family: "Cinzel", serif;
+}
+
+.user-btns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 th {

@@ -85,10 +85,10 @@ export default createStore({
       try {
         const res = await axios.delete(`${url}user/${userID}`);
         context.commit("setAdd", res.data);
-        console.log("worked");
+        console.log("deleted");
         location.reload();
       } catch (e) {
-        console.log("did not work");
+        console.log("failed");
       }
     },
     async ProdDeleted(context, prodID) {
@@ -194,11 +194,42 @@ export default createStore({
         console.error("Error updating product:", e);
       }
     },
+    async SaveUser(context, edit) {
+      try {
+        const { data } = await axios.patch(
+          `${url}user/${edit.UserID}`,
+          edit
+        );
+        context.commit("setUser", data.results);
+        console.log("User updated successfully:", data.results);
+      } catch (e) {
+        console.error("Error updating User:", e);
+      }
+    },
     addToCart({ commit }, item) {
       commit('addToCart', item);
     },
 
+      logout(context) {
+      localStorage.removeItem("user");
+      context.commit('setUser')
+      cookies.remove("MannUser");
+      this.$store.commit("setUser", null);
+      this.$router.push("/login");
+    },
+
+    async deleteUser(context, userID) {
+      try {
+        await yourDeleteLogic(userID);
+        context.commit('removeUser', userID); 
+      } catch (error) {
+        console.error('Error deleting user:', error);
+        throw error; 
+      }
+    },
+  },
+
     
     
   },
-});
+);

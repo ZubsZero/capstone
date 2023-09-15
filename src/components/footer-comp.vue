@@ -21,20 +21,20 @@
 
             <div class="mt-4">
               <!-- Facebook -->
-              <a type="button" class="btn btn-floating btn-light btn-lg"
+              <a type="button" href="https://www.facebook.com/profile.php?id=100085185114256&mibextid=cejktS" class="btn btn-floating btn-light btn-lg"
                 ><i class="bi bi-facebook"></i
               ></a>
               <!-- instagram -->
-              <a type="button" class="btn btn-floating btn-light btn-lg">
+              <a type="button" href="https://instagram.com/zubs_zero?igshid=OGQ5ZDc2ODk2ZA==" class="btn btn-floating btn-light btn-lg">
                 <i class="bi bi-instagram"></i>
               </a>
               <!-- Twitter -->
-              <a type="button" class="btn btn-floating btn-light btn-lg"
+              <a type="button" href="https://x.com/ZubsZero1?t=oT3C1Gmt0DH5bajWGgq0Fw&s=09" class="btn btn-floating btn-light btn-lg"
                 ><i class="bi bi-twitter"></i
               ></a>
-              <!-- Google + -->
-              <a type="button" class="btn btn-floating btn-light btn-lg"
-                ><i class="bi bi-google"></i
+              <!-- youtube -->
+              <a type="button" href="https://www.youtube.com/@zmxgaming6502" class="btn btn-floating btn-light btn-lg"
+                ><i class="bi bi-youtube"></i
               ></a>
               <!-- Linkedin -->
             </div>
